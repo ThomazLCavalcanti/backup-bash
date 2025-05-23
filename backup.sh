@@ -28,11 +28,6 @@ mkdir -p "$BACKUP_DIR"
 echo "Criando arquivo $ARCHIVE_PATH ..."
 tar -czf "$ARCHIVE_PATH" -C "$(dirname "$SOURCE_DIR")" "$(basename "$SOURCE_DIR")"
 
-if [[ -n "$S3_BUCKET" ]]; then
-  echo "Enviando $ARCHIVE_NAME para $S3_BUCKET ..."
-  aws s3 cp "$ARCHIVE_PATH" "$S3_BUCKET/"
-fi
-
 # Remove arquivos antigos de acordo com a retenção
 echo "Removendo backups com mais de $RETENTION_DAYS dias ..."
 find "$BACKUP_DIR" -type f -name "*.tar.gz" -mtime "+$RETENTION_DAYS" -print -delete
