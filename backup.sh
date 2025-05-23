@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 # Script de Backup Automatizado
-# Autor: <Seu Nome>
-# Data: 2025-05-23
-#
+
 # Este script compacta um diretório de origem em um arquivo com carimbo de data,
-# salva localmente, envia (opcionalmente) para a AWS S3, e aplica uma política
+# salva localmente e aplica uma política
 # de retenção para excluir backups antigos.
 
 set -euo pipefail
@@ -20,7 +18,6 @@ fi
 SOURCE_DIR="${SOURCE_DIR:-/var/www}"
 BACKUP_DIR="${BACKUP_DIR:-$SCRIPT_DIR/backups}"
 RETENTION_DAYS="${RETENTION_DAYS:-7}"
-S3_BUCKET="${S3_BUCKET:-}"   # Exemplo: s3://meubucket/backups
 
 TIMESTAMP="$(date +'%Y-%m-%d_%H-%M-%S')"
 ARCHIVE_NAME="$(basename "$SOURCE_DIR")_${TIMESTAMP}.tar.gz"
